@@ -12,31 +12,44 @@ source:
   url:
     - https://cran.r-project.org/src/contrib/bitops_{{ version }}.tar.gz
     - https://cran.r-project.org/src/contrib/Archive/bitops/bitops_{{ version }}.tar.gz
-
   sha256: 9b731397b7166dd54941fb0d2eac6df60c7a483b2e790f7eb15b4d7b79c9d69c
 
+
+  # patches:
+   # List any patch files here
+   # - fix.patch
+
 build:
-  skip: true  # [win32]
+  # If this is a new build for the same version, increment the build number.
   number: 0
 
+  # This is required to make R link correctly on Linux.
   rpaths:
     - lib/R/lib/
     - lib/
 
+
 requirements:
   build:
     - r-base
-    - posix                # [win]
-    - {{native}}toolchain  # [win]
-    - gcc                  # [not win]
+    - {{ compiler('c') }}        # [not win]
+    - {{native}}toolchain        # [win]
 
   run:
     - r-base
+    - {{native}}gcc-libs         # [win]
 
 test:
   commands:
-    - $R -e "library('bitops')"  # [not win]
+    # You can put additional test commands to be run here.
+    - $R -e "library('bitops')"           # [not win]
     - "\"%R%\" -e \"library('bitops')\""  # [win]
+
+  # You can also put a file called run_test.py, run_test.sh, or run_test.bat
+  # in the recipe that will be run at test time.
+
+  # requires:
+    # Put any additional test requirements here.
 
 about:
   home: https://CRAN.R-project.org/package=bitops
@@ -48,3 +61,23 @@ extra:
   recipe-maintainers:
     - johanneskoester
     - bgruening
+    - mingwandroid
+
+# The original CRAN metadata for this package was:
+
+# Package: bitops
+# Version: 1.0-6
+# Date: 2013-08-17
+# Author: S original by Steve Dutky <sdutky@terpalum.umd.edu> initial R port and extensions by Martin Maechler; revised and modified by Steve Dutky
+# Maintainer: Martin Maechler <maechler@stat.math.ethz.ch>
+# Title: Bitwise Operations
+# Description: Functions for bitwise operations on integer vectors.
+# License: GPL (>= 2)
+# Packaged: 2013-08-17 15:58:57 UTC; maechler
+# NeedsCompilation: yes
+# Repository: CRAN
+# Date/Publication: 2013-08-17 21:10:34
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
