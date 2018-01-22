@@ -10,8 +10,8 @@ package:
 source:
   fn: bitops_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/bitops_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/bitops/bitops_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/bitops_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/bitops/bitops_{{ version }}.tar.gz
   sha256: 9b731397b7166dd54941fb0d2eac6df60c7a483b2e790f7eb15b4d7b79c9d69c
 
 
