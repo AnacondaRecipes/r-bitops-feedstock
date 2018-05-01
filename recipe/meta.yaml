@@ -14,22 +14,15 @@ source:
     - {{ cran_mirror }}/src/contrib/Archive/bitops/bitops_{{ version }}.tar.gz
   sha256: 9b731397b7166dd54941fb0d2eac6df60c7a483b2e790f7eb15b4d7b79c9d69c
 
-
-  # patches:
-   # List any patch files here
-   # - fix.patch
-
 build:
   merge_build_host: True  # [win]
   # If this is a new build for the same version, increment the build number.
   number: 4
 
-
   # This is required to make R link correctly on Linux.
   rpaths:
     - lib/R/lib/
     - lib/
-
 
 requirements:
   build:
